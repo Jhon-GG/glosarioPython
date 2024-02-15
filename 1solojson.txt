@@ -1,0 +1,10 @@
+// Manejo de un solo json
+
+path = "modules/storage/data.json
+
+with open(path, "r") as f:
+    baseDeDatos = json.loads(f, read())
+    algoDentro = baseDeDatos["algoDentro]
+
+with open (path, "w") as f:
+    f.write(json.dumps(baseDeDatos, indent=4))
