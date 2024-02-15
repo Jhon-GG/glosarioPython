@@ -1,0 +1,65 @@
+// asignacion de modulo a ruta
+
+def modulo():
+    with open("principal/storage/modulos.json", "r") as f:
+        modulos = json.loads(f.read())
+
+    with open("principal/storage/rutas.json", "r") as f:
+        Rutas = json.loads(f.read())
+
+    bandera = True
+    while bandera:
+        system("clear")
+
+        print("""
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        |  Asignacion de Modulo a una Ruta  |
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        """)
+
+        if Rutas:
+            for i, val in enumerate(Rutas):
+                print(f"""
+                ________________________
+                Codigo: {i}
+                Nombre: {val.get('Nombre')}
+                Modulo: {val.get('Modulo')}
+                ________________________
+                """)
+            Codigo = int(input("Seleccione una Ruta \n"))
+            print("¿Esta es la Ruta a la que desea asignarle Modulos? \n")
+            print("1. Si")
+            print("2. No")
+            print("3. Salir\n")
+            opciones = int(input("Seleccione su opcion \n"))
+            if opciones == 1:
+                system("clear")
+                print("Modulos disponibles para asignar:")
+                for i, val in enumerate(modulos):
+                    print(f"""
+                    ________________________
+                    Codigo: {i}
+                    nombreModulo: {val.get('nombreModulo')}
+                    temario: {val.get('temario')}
+                    prioridad: {val.get('prioridad')}
+                    ________________________
+                    """)
+                info = {
+                    "Modulo": int(input("Asigne el modulo de la ruta (ingrese el código del módulo):\n"))
+                }
+                Rutas[Codigo]["Modulo"] = info["Modulo"]  
+                with open("principal/storage/rutas.json", "w+") as f:
+                    datos = json.dumps(Rutas, indent=4)
+                    f.write(datos)
+                bandera = False  
+            elif opciones == 2 or opciones == 3:  
+                system("clear")
+                bandera = False
+            else:
+                print("Opción no válida. Por favor, seleccione una opción correcta.")
+        else:
+            print("No hay rutas disponibles para asignar módulos.")
+            bandera = False
+
+    print("Modulos/Rutas successfully updated")  
+    

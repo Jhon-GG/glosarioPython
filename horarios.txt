@@ -1,0 +1,39 @@
+// 
+
+def mostrarOpciones():
+    print("Opciones disponibles:")
+    for i, data in enumerate(horarios, start = 1):
+        print (f"{i}. {data}")
+
+def registrar():
+    print("""
+     *******************
+    | Registre un salon |
+     *******************
+""")
+    info = {
+        "Nombre": input("Ingrese el nombre del Salon:  "),
+        'Trainer': input("Ingrese el numero de identificacion del trainer:  "),
+    }
+    mostrarOpciones()
+
+    print("Por favor, seleccione una opción del listado anterior.")
+    opcionSeleccionada = int(input("Número de opción: "))
+
+    if 1 <= opcionSeleccionada <= len(horarios):
+        info['Horario'] = horarios[opcionSeleccionada - 1]
+    else:
+        print("Opción no válida. Por favor, seleccione una opción válida.")
+    try:
+        with open("principal/storage/salones.json", "r") as f:
+            salonExistente = json.load(f)
+    except FileNotFoundError:
+        salonExistente = []
+
+    salonExistente.append(info)
+
+    with open("principal/storage/salones.json", "w+") as f:
+        data = json.dumps(salonExistente, indent=4)
+        f.write(data)
+
+    return "Successfully Camper"

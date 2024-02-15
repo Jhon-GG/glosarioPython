@@ -1,0 +1,83 @@
+// creacion de pruebas
+
+def pruebas():
+    global camper  
+
+    bandera = True
+    while bandera:
+        system("clear")
+
+        print("""
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        | Evaluaciones  de los campers |
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        """)
+        n = int(input("Ingrese el numero de Identificacion del Camper:  "))
+
+        bandera = False
+        for i, val in enumerate(camper):
+            camperId = int(val.get('Identificacion', -1))
+            if camperId == n:
+                bandera = True
+                print(f"""
+                ______________________________________
+                Identificacion = {val.get('Identificacion')}
+                Nombre: {val.get('Nombre')}
+                Apellido: {val.get('Apellido')}
+                Direccion: {val.get('Direccion')}
+                Edad: {val.get('Edad')}
+                Acudiente: {val.get('Acudiente')}
+                idAcudiente: {val.get('idAcudiente')}
+                Trainer: {val.get('trainer')}
+                Telefono: {val.get('Telefono')}
+                ______________________________________
+                """)
+        if not bandera:
+            print("No se encontro ningun camper con el numero de Identificacion proporcionado.")
+
+        print("¿Este es el camper al que desea asignarle una nota?")
+        print("1. Si")
+        print("2. No")
+        print("3. Salir")
+        opciones = int(input("Seleccione su opción: "))
+        if opciones == 1:
+            notaTeorica = int(input("Ingrese la nota teorica: \n"))
+            notaPractica = int(input("Ingrese la nota practica: \n"))
+            trabajos = int(input("Ingrese la nota de trabajos: \n"))
+            promedioNotas = (notaTeorica * 0.30) + (notaPractica * 0.60) + (trabajos * 0.10)
+
+            if promedioNotas < 60:
+                input("Lo sentimos Camper, no has logrado superar el Modulo")
+            else:
+                input("Muchas Felicitaciones Camper has logrado superar este Modulo")
+                estado_elegido = int(input("Elija el estado del Camper:\n\t" + "\t".join([f"{i + 1}. {estado}\n" for i, estado in enumerate(estados)])))
+
+                for campers in camper:
+                    if n == int(campers.get("Identificacion")):
+                        for i,estado in enumerate(estados):
+                            if estado_elegido == i+1:
+                                print(estado)
+                                campers["Estado"]=estado
+                                break
+                # info = {
+                #     "Identificacion": n,
+                #     "Nombre": val.get('Nombre'),
+                #     "Apellido": val.get('Apellido'),
+                #     "Edad": val.get('Edad'),
+                #     "Direccion": val.get('Direccion'),
+                #     "Acudiente": val.get('Acudiente'),
+                #     "idAcudiente": val.get('idAcudiente'),
+                #     "Telefono": val.get('Telefono'),
+                #     "Estado": estado_elegido,
+                # }
+
+                # Verificar que el índice n sea un índice válido antes de asignar
+
+                with open("principal/storage/camper.json", "w") as f:
+                    data = json.dumps(camper, indent=4)
+                    print(data)
+                    f.write(data)
+        elif opciones == 3:
+            bandera = False
+
+            
