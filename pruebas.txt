@@ -1,0 +1,27 @@
+opciones = int(input("Seleccione su opción: "))
+        if opciones == 1:
+            notaTeorica = int(input("Ingrese la nota teorica: \n"))
+            notaPractica = int(input("Ingrese la nota practica: \n"))
+            trabajos = int(input("Ingrese la nota de trabajos: \n"))
+            promedioNotas = (notaTeorica * 0.30) + (notaPractica * 0.60) + (trabajos * 0.10)
+
+            if promedioNotas < 60:
+                input("Lo sentimos Camper, no has logrado superar el Modulo")
+            else:
+                input("Muchas Felicitaciones Camper has logrado superar este Modulo")
+                estado_elegido = int(input("Elija el estado del Camper:\n\t" + "\t".join([f"{i + 1}. {estado}\n" for i, estado in enumerate(estados)])))
+
+                for campers in camper:
+                    if n == int(campers.get("Identificacion")):
+                        for i,estado in enumerate(estados):
+                            if estado_elegido == i+1:
+                                print(estado)
+                                campers["Estado"]=estado
+                                break
+                                
+                with open("principal/storage/camper.json", "w") as f:
+                    data = json.dumps(camper, indent=4)
+                    print(data)
+                    f.write(data)
+        elif opciones == 3:
+            bandera = False

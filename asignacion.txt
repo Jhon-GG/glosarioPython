@@ -1,0 +1,94 @@
+// En este apartado se realizaron asignaciones (modulo a ruta)
+
+if Rutas:
+            for i, val in enumerate(Rutas):
+                print(f"""
+                ________________________
+                Codigo: {i}
+                Nombre: {val.get('Nombre')}
+                Modulo: {val.get('Modulo')}
+                ________________________
+                """)
+            Codigo = int(input("Seleccione una Ruta \n"))
+            print("¿Esta es la Ruta a la que desea asignarle Modulos? \n")
+            print("1. Si")
+            print("2. No")
+            print("3. Salir\n")
+            opciones = int(input("Seleccione su opcion \n"))
+            if opciones == 1:
+                system("clear")
+                print("Modulos disponibles para asignar:")
+                for i, val in enumerate(modulos):
+                    print(f"""
+                    ________________________
+                    Codigo: {i}
+                    nombreModulo: {val.get('nombreModulo')}
+                    temario: {val.get('temario')}
+                    prioridad: {val.get('prioridad')}
+                    ________________________
+                    """)
+                info = {
+                    "Modulo": int(input("Asigne el modulo de la ruta (ingrese el código del módulo):\n"))
+                }
+                Rutas[Codigo]["Modulo"] = info["Modulo"]  
+                with open("principal/storage/rutas.json", "w+") as f:
+                    datos = json.dumps(Rutas, indent=4)
+                    f.write(datos)
+                bandera = False  
+            elif opciones == 2 or opciones == 3:  
+                system("clear")
+                bandera = False
+            else:
+                print("Opción no válida. Por favor, seleccione una opción correcta.")
+        else:
+            print("No hay rutas disponibles para asignar módulos.")
+            bandera = False
+
+//  otra manera de asignaciones
+
+with open("module/storage/trainer.json", "r") as f: # Cargo al trainer
+        trainer = json.load(f)
+        print("Trainer disponibles:")
+        print(json.dumps(trainer, indent=4))
+
+
+    codigobuscar = input("Ingrese el código del trainer que desea buscar: ")# Busco por código
+    traiencontrada = None
+    for trai in trainer:
+        if trai["Documento"] == codigobuscar:
+            traiencontrada = trai
+            break
+
+    if trai_encontrada:
+        print("Información del trainer encontrado:")
+        print(json.dumps(trai_encontrada, indent=4))
+
+
+        with open("module/storage/rutasj.json", "r") as f:# Cargo rutas y muestro
+            Rutas = json.load(f)
+            print("Rutas disponibles:")
+            print(json.dumps(Rutas, indent=4))
+
+        while True:
+            codmod = input("Ingrese el código de la ruta que desea agrega al trainer (o 'q' para salir): ")
+            if codmod.lower() == 'q':
+                break
+            ruta_encontrado = next((mod for mod in Rutas if mod["Codigo"] == codmod), None)
+            if ruta_encontrado:
+                print("Información de la ruta seleccionada:")
+                print(json.dumps(ruta_encontrado, indent=4))
+                if 'Ruta_asignada' not in trai_encontrada:#Aseguro de que 'Ruta_asignada' exista en el diccionario
+                    trai_encontrada['Ruta_asignada'] = []#Si no existe, inicialízalo como una lista vacía
+
+                trai_encontrada["Ruta_asignada"].append(ruta_encontrado)
+                print("Asignación exitosa.")
+            else:
+                print("No se encontró una Ruta con ese código.")
+ 
+        with open("module/storage/trainer.json", "w") as f:# aca guardo lo que cambia el codigpo
+            json.dump(trainer, f, indent=4)
+    else:
+        print("No se encontró un trainer con ese Documento.")
+
+if __name =="__main":
+    asignaRuta()

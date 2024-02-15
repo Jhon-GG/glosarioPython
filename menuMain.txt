@@ -1,0 +1,50 @@
+// En este apartado se importan los demas apartados que se van a usar mas adelante
+
+import json
+from os import system
+import os
+import principal.camper as camper
+import principal.trainer as trainer
+import principal.listar as listar
+from principal.validate import menuNoValid
+import principal.salones as salones
+
+
+// Ademas se crea el menu principal sobre el que vamos a estar trabajando durante todo el proyecto
+
+def menu():
+    print("Sistema de datos CampusLands")
+    print("\t1. Apartado Camper")
+    print("\t2. Apartado Trainer")
+    print("\t3. Apartado Listar")
+    print("\t4. Apartado Salones")
+    print("\t0. Salir")
+ 
+
+// En esta parte se realizó el Crud del menu, y se llaman los archivos json necesarios
+
+bandera = True
+while (bandera):
+    menu()
+    opciones = int(input())
+    match(opciones):
+        case 1:
+            with open("principal/storage/camper.json", "r") as f:
+                camper.camper = json.loads(f.read())
+                f.close()
+            with open("principal/storage/rutas.json", "r") as f:
+                camper.Rutas = json.loads(f.read())
+                f.close()
+            with open("principal/storage/rutas.json", "r") as f:
+                camper.modulos = json.loads(f.read())
+            with open("principal/storage/salones.json", "r") as f:
+                salones = json.loads(f.read())
+                f.close()
+                system("clear")
+                camper.menu()
+        case 0:
+            system("clear")
+            bandera = False
+        case _:
+            menuNoValid(opciones)
+    

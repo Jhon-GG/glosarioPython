@@ -1,0 +1,12 @@
+// En esta parte se generó la parte de asignar a este json (registrar)
+
+camper.append(info)
+    with open("principal/storage/camper.json", "w") as f:
+        data = json.dumps(camper, indent=4)
+        f.write(data)
+
+## with open("principal/storage/camper.json", "w") as f:: Abre el archivo llamado "camper.json" en modo escritura ("w") y lo asigna a la variable f. El with se asegura de que el archivo se cierre adecuadamente después de que se complete el bloque de código.
+
+## data = json.dumps(camper, indent=4): Convierte el diccionario camper a una cadena JSON utilizando la función json.dumps(). El parámetro indent=4 se utiliza para agregar sangrías de 4 espacios en la salida JSON, lo que hace que el archivo JSON sea más legible.
+
+## f.write(data): Escribe la cadena JSON en el archivo abierto.

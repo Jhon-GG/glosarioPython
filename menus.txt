@@ -1,0 +1,34 @@
+// En esta parte se creó la estructura de los menus que se usaran dentro de cada apartado asi como llamar a las funciones declaradas dentro de este mismo archivos
+def menu():
+    bandera = False
+    while (bandera):
+        print("""
+     *********************************
+    |  SISTEMA DE REPORTES Y FILTROS  |
+     *********************************
+""")   
+    print("\t1. Listar todos los Trainers")
+    print("\t2. Listar Salones")
+    print("\t3. Listar Rutas")
+    print("\t4. Listar Temas")
+    print("\t5. Listar Campers Preinscritos")
+    print("\t6. Listar Campers Inscritos")
+    print("\t7. Listar Campers Aprobados")
+    print("\t8. Listar Campers En Riesgo")
+    print("\t9. Listar Campers Filtrados")
+    print("\t0. Salir \n")
+    opc = int(input("seleccione la opcion que desea listar: \n"))
+    match(opc):
+        case 1: todosTrainers()
+        case 2: salones()
+        case 3: rutasEntrenamiento()
+        case 4: temarios()
+        case 5: campersPreinscritos()
+        case 6: campersInscritos()
+        case 7: campersAprobados()
+        case 8: campersEnRiesgo()
+        case 9: campersFiltrados()
+        case 0: 
+            system("clear")
+            bandera = True
+        case _: print(menuNoValid(opc))

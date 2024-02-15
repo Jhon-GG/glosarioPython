@@ -1,0 +1,62 @@
+// En esta parte se generó el registro
+
+ edad = int(input("Ingrese la edad del camper:  "))
+    acudiente = ""
+    idAcudiente = 0
+
+    if edad <= 16:
+        return print('No puede ingresar a Campus')
+    elif edad >16 and edad <18:
+        acudiente = input("Ingrese el nombre del acudiente:  ")
+        idAcudiente = int(input("Ingrese el numero de identificación del acudiente:  "))
+
+    info = {
+        "Identificacion": input("Ingrese el número de identificación del Camper: "),
+        "Nombre": input("Ingrese el nombre del Camper:  "),
+        "Apellido": input("Ingrese el apellido del Camper:  "),
+        "Direccion": input("Ingrese la direccion del Camper:  "),
+        "Edad": edad,
+        "Acudiente": acudiente,
+        "idAcudiente": idAcudiente,
+        "Telefono": [
+            {
+            f"{'Fijo' if(int(input('1. Fijo  0. Celular:  '))) else 'Celular'}":
+            int(input(f'Numero de contacto {x+1}: '))
+            }
+            for x in range(int(input("Ingrese la cantidad de telefonos que tiene:  ")))         
+        ],
+        "Estado": int(input("Asigne el nuevo estado del camper:\n\t"+"\t".join([f"{estadosOrganizado.index(i)+1}. {i}\n" for i in (estadosOrganizado)])))
+    } 
+
+// En esta parte se generó la parte de mostrar los datos disponibles (disponibles)
+
+system("clear")
+    n = int(input("Escribe el numero de identificacion: "))
+
+    print("""
+         ~~~~~~~~~~~~~~~~~~~~~
+        | Campers Disponibles |
+         ~~~~~~~~~~~~~~~~~~~~~      
+    """)
+
+    bandera = False
+    for i, val in enumerate(camper):
+        camperId = int(val.get('Identificacion', -1)) 
+        if camperId == n:
+            bandera = True
+            print(f"""
+            ______________________________________
+            Identificacion = {val.get('Identificacion')}
+            Nombre: {val.get('Nombre')}
+            Apellido: {val.get('Apellido')}
+            Direccion: {val.get('Direccion')}
+            Edad: {val.get('Edad')}
+            Acudiente: {val.get('Acudiente')}
+            idAcudiente: {val.get('idAcudiente')}
+            Trainer: {val.get('trainer')}
+            Telefono: {val.get('Telefono')}
+            ______________________________________
+            """)
+
+    if not bandera:
+        print("No se encontró ningun camper con el numero de Identificacion proporcionado.")

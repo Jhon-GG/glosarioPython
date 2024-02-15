@@ -1,0 +1,12 @@
+// En data creamos algunos datos que llamaremos mas delante
+
+estados = ['Preinscrito', 'Inscrito', 'Aprobado', 'EnRiesgo', 'Filtrado']
+estados.sort(reverse=True)
+estadosOrganizado = list(enumerate(estados, start= 1))
+camper = []
+trainer = []
+modulos = []
+Rutas = []
+salon = []
+horarios =[('6:00 am - 10:00 am'), ('10:00 am - 2:00 pm'), ('2:00 pm - 6:00 pm'), ('6:00 pm - 10:00 pm')] 
+
