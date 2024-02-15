@@ -1,0 +1,30 @@
+// me muestra como listar segun qué parámetro
+
+with open("principal/storage/camper.json") as f:
+            camper = json.loads(f.read())
+
+    system("clear")
+    print("""
+     *******************************
+    |  Filtro de Campers Filtrados  |
+     *******************************
+    """)
+    for i,val in enumerate(camper):
+        if val.get("Estado") == "Filtrado":
+            print(f"""
+________________________
+Codigo: {i}
+Nombre: {val.get('Nombre')}
+Apellido: {val.get('Apellido')}
+Identificacion: {val.get('Identificacion')}
+Direccion: {val.get('Direccion')}
+Edad: {val.get('Edad')}
+NombreAcudiente: {val.get('NombreAcudiente')}
+NumeroAcudiente: {val.get('NumeroAcudiente')}
+idAcudiente: {val.get('idAcudiente')}
+TelefonoCamper: {val.get('TelefonoCamper')}
+Estado: {val.get('Estado')}
+________________________
+""")
+    input("Presione enter para continuar..")
+    system("clear")
